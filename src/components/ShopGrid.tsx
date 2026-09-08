@@ -1,6 +1,6 @@
 import { isShopifyConfigured, getProducts } from "@/lib/shopify";
 import { exampleProducts } from "@/lib/products";
-import { TrouserIcon } from "@/components/TrouserIcon";
+import { ProductCard } from "@/components/ProductCard";
 import { ShopHeading } from "@/components/ShopHeading";
 
 export async function ShopGrid() {
@@ -17,6 +17,9 @@ export async function ShopGrid() {
             {shopifyProducts.map((p) => (
               <div key={p.id} className="flex flex-col bg-paper">
                 <div className="relative flex aspect-[3/4.3] items-end justify-center pb-3.5">
+                  <span className="absolute left-3 top-3 text-[13px] font-extrabold tracking-[-0.01em]">
+                    OMPK
+                  </span>
                   {p.featuredImage ? (
                     // eslint-disable-next-line @next/next/no-img-element
                     <img
@@ -24,9 +27,7 @@ export async function ShopGrid() {
                       alt={p.featuredImage.altText ?? p.title}
                       className="h-full w-full object-cover"
                     />
-                  ) : (
-                    <TrouserIcon fill="#33455f" />
-                  )}
+                  ) : null}
                 </div>
                 <div className="px-3.5 pb-5.5 pt-4">
                   <div className="text-[13px] font-bold">{p.title}</div>
@@ -41,18 +42,7 @@ export async function ShopGrid() {
         ) : (
           <div className="grid grid-cols-2 gap-px bg-newsprint-line sm:grid-cols-4">
             {exampleProducts.map((p) => (
-              <div key={p.id} className="flex flex-col bg-paper">
-                <div className="flex aspect-[3/4.3] items-end justify-center pb-3.5">
-                  <TrouserIcon fill={p.swatch} dashed={p.dashed} />
-                </div>
-                <div className="px-3.5 pb-5.5 pt-4">
-                  <div className="text-[13px] font-bold">{p.name}</div>
-                  <div className="mt-0.5 text-[10px] tracking-[0.04em] text-ink-soft">
-                    {p.cat}
-                  </div>
-                  <div className="mt-2 text-[12px] font-bold tabular-nums">{p.price}</div>
-                </div>
-              </div>
+              <ProductCard key={p.id} product={p} />
             ))}
           </div>
         )}
