@@ -13,7 +13,7 @@ export function RadioTeaser() {
         alt="OMPK Radio Nº001 — live, Buenos Aires"
         fill
         sizes="100vw"
-        className="object-cover object-[50%_25%] grayscale contrast-[1.05]"
+        className="object-cover object-[50%_25%] grayscale contrast-[1.15]"
       />
       <div
         className="pointer-events-none absolute inset-0"

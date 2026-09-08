@@ -16,10 +16,7 @@ export async function ShopGrid() {
           <div className="grid grid-cols-2 gap-px bg-newsprint-line sm:grid-cols-4">
             {shopifyProducts.map((p) => (
               <div key={p.id} className="flex flex-col bg-paper">
-                <div className="relative flex aspect-[3/4.3] items-end justify-center pb-3.5">
-                  <span className="absolute left-3 top-3 text-[13px] font-extrabold tracking-[-0.01em]">
-                    OMPK
-                  </span>
+                <div className="relative aspect-[3/4.3]">
                   {p.featuredImage ? (
                     // eslint-disable-next-line @next/next/no-img-element
                     <img

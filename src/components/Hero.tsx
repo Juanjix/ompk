@@ -11,7 +11,7 @@ export function Hero() {
         fill
         priority
         sizes="100vw"
-        className="object-cover object-[30%_center] grayscale-[10%]"
+        className="object-cover object-[30%_center] grayscale contrast-[1.15]"
       />
     </section>
   );

@@ -21,7 +21,7 @@ export function ArchiveList() {
             alt="OMPK — backstage, Buenos Aires"
             fill
             sizes="(min-width: 768px) 300px, 100vw"
-            className="object-cover grayscale contrast-[1.1]"
+            className="object-cover grayscale contrast-[1.15]"
           />
         </div>
 

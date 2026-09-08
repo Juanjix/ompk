@@ -1,10 +1,11 @@
-import { TrouserIcon } from "@/components/TrouserIcon";
 import type { ExampleProduct } from "@/lib/products";
 
 /**
  * The per-garment card used on the shop grid and as the hero's product
- * callouts. Mark, bootcut number, materials, origin, price — the same
- * hierarchy as a real hang tag (Brand Bible §26), not a generic PDP tile.
+ * callouts. Until real product photography exists, the image area is a
+ * flat fabric-swatch fill — no illustrated garment, no gradient frame.
+ * A drawn icon reads like a wireframe; a plain color block reads like a
+ * swatch card, which is at least honest about what it is.
  */
 export function ProductCard({
   product,
@@ -18,19 +19,12 @@ export function ProductCard({
   return (
     <div className="flex flex-col bg-paper">
       <div
-        className={`relative flex items-end justify-center ${
-          compact ? "aspect-[3/4]" : "aspect-[3/4.3]"
-        } pb-3.5`}
+        className={compact ? "aspect-[3/4]" : "aspect-[3/4.3]"}
         style={{
-          background:
-            "linear-gradient(165deg, var(--paper-raised), var(--newsprint) 140%)",
+          background: product.swatch,
+          boxShadow: product.outline ? "inset 0 0 0 1px var(--newsprint-line)" : undefined,
         }}
-      >
-        <span className="absolute left-3 top-3 text-[13px] font-extrabold tracking-[-0.01em]">
-          OMPK
-        </span>
-        <TrouserIcon fill={product.swatch} dashed={product.dashed} />
-      </div>
+      />
       <div className="px-3.5 pb-5.5 pt-4">
         <div className="text-[13px] font-bold leading-snug">
           {product.name.toUpperCase()}
