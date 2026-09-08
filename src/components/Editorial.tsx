@@ -42,21 +42,32 @@ export function Editorial() {
 
         <div
           className="relative aspect-[4/5] overflow-hidden"
-          style={{ background: "linear-gradient(160deg,#2b2620,#171512 65%)" }}
+          style={{ background: "linear-gradient(155deg,#2a2724 0%,#171512 60%,#0f0e0c 100%)" }}
         >
-          {[
-            { left: "22%", top: "30%", w: "7%", h: "11%", opacity: 1 },
-            { left: "22%", top: "46%", w: "7%", h: "11%", opacity: 0.3 },
-            { left: "34%", top: "38%", w: "7%", h: "11%", opacity: 0.55 },
-            { left: "60%", top: "24%", w: "6%", h: "9%", opacity: 1 },
-            { left: "70%", top: "52%", w: "6%", h: "9%", opacity: 0.4 },
-          ].map((w, i) => (
-            <div
-              key={i}
-              className="absolute bg-[#e8b96a]"
-              style={{ left: w.left, top: w.top, width: w.w, height: w.h, opacity: w.opacity }}
-            />
-          ))}
+          <span className="absolute left-4 top-4 text-[13px] font-extrabold tracking-[-0.01em] text-paper">
+            OMPK
+          </span>
+
+          {/* flight-case stack, backstage register — Brand Bible §16 Mode B */}
+          <div className="absolute bottom-[14%] left-[10%] h-[22%] w-[34%] border border-[#4a443b] bg-[#221f1b]" />
+          <div className="absolute bottom-[14%] left-[10%] h-[2px] w-[34%] translate-y-[9%] bg-[#4a443b]" />
+          <div className="absolute bottom-[36%] left-[13%] h-[16%] w-[28%] border border-[#4a443b] bg-[#26221d]" />
+
+          {/* warm practical light */}
+          <div
+            className="absolute right-[16%] top-[20%] h-24 w-24 rounded-full opacity-70"
+            style={{ background: "radial-gradient(circle, #e8b96a55 0%, transparent 70%)" }}
+          />
+          <div className="absolute right-[20%] top-[24%] h-2.5 w-2.5 rounded-full bg-[#e8b96a]" />
+
+          {/* the pinned poster line */}
+          <div className="absolute right-[8%] top-[10%] w-[38%] border border-paper/25 bg-paper/[0.06] p-3 text-right backdrop-blur-[1px]">
+            <div className="font-editorial text-[13px] italic leading-tight text-paper/85">
+              {lang === "es" ? "Un mañana" : "A louder"}
+              <br />
+              {lang === "es" ? "más ruidoso." : "tomorrow."}
+            </div>
+          </div>
         </div>
       </div>
     </section>
