@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useLang } from "@/lib/language";
 
 export function RadioTeaser() {
@@ -8,16 +9,14 @@ export function RadioTeaser() {
   return (
     <section id="radio" className="bg-night px-6 py-24 text-paper sm:px-8 sm:py-28">
       <div className="mx-auto grid max-w-[1180px] items-center gap-14 md:grid-cols-[280px_1fr]">
-        <div className="relative mx-auto aspect-square w-[200px] rounded-full border border-[#3a352c] md:mx-0 md:w-full">
-          <div
-            className="absolute inset-0 rounded-full"
-            style={{
-              background:
-                "repeating-radial-gradient(circle at 50% 50%, #2a2620 0 2px, #201d19 2px 5px)",
-            }}
+        <div className="relative mx-auto aspect-[3/4] w-[220px] overflow-hidden border border-[#3a352c] md:mx-0 md:w-full">
+          <Image
+            src="/images/radio-001-live.jpg"
+            alt="OMPK Radio Nº001 — live, Buenos Aires"
+            fill
+            sizes="(min-width: 768px) 280px, 220px"
+            className="object-cover object-top grayscale contrast-[1.1]"
           />
-          <div className="absolute inset-[38%] rounded-full border border-[#3a352c] bg-night" />
-          <div className="absolute inset-[47%] rounded-full bg-paper" />
         </div>
 
         <div className="text-center md:text-left">

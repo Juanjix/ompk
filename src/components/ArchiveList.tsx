@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useLang } from "@/lib/language";
 
 const ROWS = [
@@ -13,27 +14,39 @@ export function ArchiveList() {
 
   return (
     <section id="archive" className="px-6 py-24 sm:px-8 sm:py-28">
-      <div className="mx-auto max-w-[1180px]">
-        <span className="mb-4 block text-[11px] font-extrabold uppercase tracking-[0.18em] text-signal">
-          {lang === "es" ? "El archivo empieza acá" : "The archive starts here"}
-        </span>
-        <h2 className="mb-9 text-[clamp(26px,4vw,42px)] font-extrabold tracking-tight">
-          {lang === "es" ? "Archivo" : "Archive"}
-        </h2>
+      <div className="mx-auto grid max-w-[1180px] gap-14 md:grid-cols-[300px_1fr]">
+        <div className="relative aspect-[3/4] overflow-hidden">
+          <Image
+            src="/images/archive-backstage.jpg"
+            alt="OMPK — backstage, Buenos Aires"
+            fill
+            sizes="(min-width: 768px) 300px, 100vw"
+            className="object-cover grayscale contrast-[1.1]"
+          />
+        </div>
 
-        <div className="border-t border-ink">
-          {ROWS.map((row) => (
-            <div
-              key={row.num}
-              className="grid grid-cols-[80px_1fr_auto] items-baseline gap-5 border-b border-newsprint-line py-5"
-            >
-              <div className="text-[11px] font-bold tabular-nums text-ink-soft">{row.num}</div>
-              <div className="text-[16px] font-bold">{lang === "es" ? row.es : row.en}</div>
-              <div className="whitespace-nowrap text-[11px] tracking-[0.04em] text-ink-soft">
-                {row.meta}
+        <div>
+          <span className="mb-4 block text-[11px] font-extrabold uppercase tracking-[0.18em] text-signal">
+            {lang === "es" ? "El archivo empieza acá" : "The archive starts here"}
+          </span>
+          <h2 className="mb-9 text-[clamp(26px,4vw,42px)] font-extrabold tracking-tight">
+            {lang === "es" ? "Archivo" : "Archive"}
+          </h2>
+
+          <div className="border-t border-ink">
+            {ROWS.map((row) => (
+              <div
+                key={row.num}
+                className="grid grid-cols-[80px_1fr_auto] items-baseline gap-5 border-b border-newsprint-line py-5"
+              >
+                <div className="text-[11px] font-bold tabular-nums text-ink-soft">{row.num}</div>
+                <div className="text-[16px] font-bold">{lang === "es" ? row.es : row.en}</div>
+                <div className="whitespace-nowrap text-[11px] tracking-[0.04em] text-ink-soft">
+                  {row.meta}
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     </section>
