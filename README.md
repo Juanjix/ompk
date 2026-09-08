@@ -1,36 +1,49 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# OMPK — Buenos Aires
 
-## Getting Started
+Independent clothing label, headless storefront: Next.js (App Router) front end + Shopify (Storefront API) as the commerce backend. Deliberately a separate repo from the rolling-order / AFIP codebase — nothing in here should depend on that project.
 
-First, run the development server:
+Full brand reasoning — naming, logo, positioning — lives in [`docs/`](./docs): `BRAND_BIBLE.md` is the source of truth; the `naming-round-*.md` and `logo-system-v01.md` files are the decision history behind the current name (OMPK) and mark.
+
+## Getting started
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000). The homepage renders with example product data until Shopify is connected (see below) — nothing is broken, it's just not live inventory yet.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Connecting Shopify
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+The storefront reads products via the **Storefront API** (not the Admin API — that stays server-side/private, this is the public read-only one meant for a front end).
 
-## Learn More
+1. In the Shopify admin: **Settings → Apps and sales channels → Develop apps** → create an app → enable the **Storefront API** scope `unauthenticated_read_product_listings` (add more scopes as checkout/cart features are built) → install the app → copy the **Storefront API access token**.
+2. Copy `.env.example` to `.env.local` and fill in:
+   ```
+   SHOPIFY_STORE_DOMAIN=your-store.myshopify.com
+   SHOPIFY_STOREFRONT_ACCESS_TOKEN=shpat_...
+   ```
+3. Restart `npm run dev`. `src/components/ShopGrid.tsx` switches from the example catalogue (`src/lib/products.ts`) to real Shopify products automatically — see `isShopifyConfigured()` in `src/lib/shopify.ts`.
 
-To learn more about Next.js, take a look at the following resources:
+No Shopify store yet? Creating the store itself (account, plan, billing) is a Shopify-account action — do that directly at shopify.com; this repo is ready to point at it the moment credentials exist.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Project structure
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```
+src/
+  app/            App Router entry (layout.tsx sets fonts + metadata, page.tsx assembles the homepage)
+  components/     One component per homepage section (Header, Hero, Editorial, ShopGrid, RadioTeaser, ArchiveList, Footer)
+  lib/
+    language.tsx  ES/EN toggle (React context) — Spanish is the default per Brand Bible §29
+    shopify.ts    Storefront API client (plain fetch, no SDK)
+    products.ts   Example catalogue used until Shopify is connected
+docs/             Brand Bible + naming/logo decision history
+```
 
-## Deploy on Vercel
+## Design system
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Brand tokens (Paper / Ink / Newsprint / Signal / Tobacco / Wine) live as CSS variables in `src/app/globals.css`, mapped into Tailwind v4 via `@theme inline` — use them as `bg-paper`, `text-ink-soft`, `text-signal`, etc. rather than hardcoded hex values. Three type voices, per Brand Bible §12: `font-grotesk` (Archivo — nav, data, UI), `font-editorial` (Piazzolla — stories, quotes, longer copy), `font-script` (Yellowtail, **placeholder only** — the primary OMPK wordmark; see `docs/logo-system-v01.md` §Open items: commission a custom script before this ships publicly).
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Deploy
+
+Vercel is the natural fit for a Next.js App Router project. Connect the GitHub repo directly in the Vercel dashboard; set the same two `SHOPIFY_*` env vars there under Project Settings → Environment Variables.
