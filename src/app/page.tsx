@@ -1,5 +1,6 @@
 import { Header } from "@/components/Header";
 import { Hero } from "@/components/Hero";
+import { CollectionIntro } from "@/components/CollectionIntro";
 import { Editorial } from "@/components/Editorial";
 import { ShopGrid } from "@/components/ShopGrid";
 import { RadioTeaser } from "@/components/RadioTeaser";
@@ -11,6 +12,7 @@ export default function Home() {
     <>
       <Header />
       <Hero />
+      <CollectionIntro />
       <Editorial />
       <ShopGrid />
       <RadioTeaser />
