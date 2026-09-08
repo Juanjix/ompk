@@ -7,13 +7,13 @@ export function RadioTeaser() {
   const { lang } = useLang();
 
   return (
-    <section id="radio" className="relative flex min-h-[70vh] items-center overflow-hidden text-paper sm:min-h-[85vh]">
+    <section id="radio" className="relative flex min-h-[70vh] items-center overflow-hidden text-paper">
       <Image
         src="/images/radio-001-live.jpg"
         alt="OMPK Radio Nº001 — live, Buenos Aires"
         fill
         sizes="100vw"
-        className="object-cover object-[65%_20%] grayscale contrast-[1.15] sm:object-[50%_25%]"
+        className="object-cover object-[65%_20%] grayscale contrast-[1.15]"
       />
       <div
         className="pointer-events-none absolute inset-0"
